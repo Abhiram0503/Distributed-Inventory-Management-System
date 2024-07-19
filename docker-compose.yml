@@ -1,0 +1,62 @@
+version: '3.7'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - clus_network
+
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    ports:
+        - "3006:3306"
+    networks:
+      - clus_network
+
+  consumer1:
+    build:
+      context: .
+      dockerfile: Dockerfile-consumer1
+    networks:
+      - clus_network
+
+  consumer2:
+    build:
+      context: .
+      dockerfile: Dockerfile-consumer2
+    networks:
+      - clus_network
+
+  consumer3:
+    build:
+      context: .
+      dockerfile: Dockerfile-consumer3
+    networks:
+      - clus_network
+
+  consumer4:
+    build:
+      context: .
+      dockerfile: Dockerfile-consumer4
+    networks:
+      - clus_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-app
+    ports:
+      - "5000:5000"
+    networks:
+      - clus_network
+
+networks:
+  clus_network:

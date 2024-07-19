@@ -1,0 +1,18 @@
+FROM python:3.8
+# Install netcat
+RUN apt-get update && apt-get install -y netcat-openbsd
+# Install necessary system dependencies
+RUN apt-get update && apt-get install -y \
+    default-libmysqlclient-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY consumer1.py .
+COPY wait_c1.sh /wait_c1.sh
+
+RUN chmod +x /wait_c1.sh
+RUN pip install pika mysql-connector-python
+
+CMD /bin/bash -c "/wait_c1.sh"
+# CMD /wait-for-it.sh rabbitmq:5672 -- python3 consumer1.py

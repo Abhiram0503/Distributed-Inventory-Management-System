@@ -1,0 +1,21 @@
+FROM python:3.8
+# Install netcat
+RUN apt-get update && apt-get install -y netcat-openbsd
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    default-libmysqlclient-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy necessary files
+COPY consumer3.py .
+COPY wait_c3.sh /wait_c3.sh
+
+RUN chmod +x /wait_c3.sh
+# Install Python dependencies
+RUN pip install pika mysql-connector-python
+
+# Command to wait for RabbitMQ and then run the Python script
+#CMD /wait-for-it.sh rabbitmq:5672 -- python3 consumer3.py
+CMD /bin/bash -c "/wait_c3.sh"

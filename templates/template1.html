@@ -1,0 +1,184 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function validateForm() {
+            var itemName = document.getElementById("item_name").value;
+            var totalAvailable = document.getElementById("total_available").value;
+            // Regular expressions for validation
+            var alphanumericRegex = /^[a-zA-Z0-9\s]+$/;
+            var numberRegex = /^\d+$/;
+            var floatRegex = /^\d+(\.\d+)?$/;
+
+            if (!itemName.match(alphanumericRegex)) {
+                alert("Item name should contain only alphanumeric characters.");
+                return false;
+            }
+
+            if (!totalAvailable.match(numberRegex)) {
+                alert("Total available products should be a number.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+    <title>Template 1</title>
+</head>
+<body>
+    <h2>Welcome to Template 1</h2>
+    <form action="/send_message1" method="post" onsubmit="return validateForm()">
+        <label for="item_name">Item Name:</label><br>
+        <input type="text" id="item_name" name="item_name" pattern="[a-zA-Z0-9\s]+" required><br><br>
+        <label for="total_available">Number of pieces added</label><br>
+        <input type="text" id="total_available" name="total_available" pattern="\d+" required><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <a href="/"><button>Back to Index</button></a>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Template 1</title>
+    <style>
+        /* Page styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Main container */
+        .container {
+            text-align: left;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+
+        /* Heading style */
+        h2 {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Form styles */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+
+        /* Submit button style */
+        input[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Button hover effect */
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* Back button styling */
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Link styling */
+        a {
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            var itemName = document.getElementById("item_name").value;
+            var totalAvailable = document.getElementById("total_available").value;
+
+            // Regular expressions for validation
+            var alphanumericRegex = /^[a-zA-Z0-9\s]+$/;
+            var numberRegex = /^\d+$/;
+
+            if (!itemName.match(alphanumericRegex)) {
+                alert("Item name should contain only alphanumeric characters.");
+                return false;
+            }
+
+            if (!totalAvailable.match(numberRegex)) {
+                alert("Total available products should be a number.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Items Update </h2>
+        <form action="/send_message1" method="post" onsubmit="return validateForm()">
+            <label for="item_name">Item Name:</label>
+            <input type="text" id="item_name" name="item_name" pattern="[a-zA-Z0-9\s]+" required>
+
+            <label for="total_available">Number of pieces</label>
+            <input type="text" id="total_available" name="total_available" pattern="\d+" required>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <a href="/"><button>Back to Index</button></a>
+    </div>
+</body>
+
+</html>

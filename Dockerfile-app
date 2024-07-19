@@ -1,0 +1,42 @@
+# FROM python:3.8
+
+# WORKDIR /app
+
+# # Copy necessary files
+# COPY app.py .
+# COPY templates/ templates/
+# COPY wait-for-it.sh /wait-for-it.sh
+
+
+# # Install Python dependencies
+# RUN pip install flask pika
+
+# # Grant execute permissions to the wait-for-it.sh script
+# RUN chmod +x /wait-for-it.sh
+
+# # Expose the port on which the Flask app runs
+# EXPOSE 5000
+
+# # Command to run the Flask app
+# CMD /wait-for-it.sh -t 0 rabbitmq:5672 -- /wait-for-it.sh -t 0 mysql:3306 -- python3 app.py
+FROM python:3.8
+
+WORKDIR /app
+# Install netcat
+RUN apt-get update && apt-get install -y netcat-openbsd
+# Copy necessary files
+COPY app.py .
+COPY templates/ templates/
+COPY wait1.sh /wait1.sh
+
+# Install Python dependencies
+RUN pip install flask pika
+
+# Grant execute permissions to the wait1.sh script
+RUN chmod +x /wait1.sh
+
+# Expose the port on which the Flask app runs
+EXPOSE 5000
+
+# Command to run the Flask app after waiting for RabbitMQ and MySQL servers
+CMD /bin/bash -c "/wait1.sh"

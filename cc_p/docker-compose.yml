@@ -1,0 +1,85 @@
+# version: '3.7'
+
+# services:
+#   rabbitmq:
+#     image: rabbitmq:3-management
+#     ports:
+#       - "5672:5672"
+#       - "15672:15672"
+#     environment:
+#       RABBITMQ_DEFAULT_USER: guest
+#       RABBITMQ_DEFAULT_PASS: guest
+
+#   producer:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile-producer
+#     depends_on:
+#       - rabbitmq
+
+#   consumer:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile-consumer
+#     depends_on:
+#       - rabbitmq
+#     ports:
+#       - "5000:5000"
+    
+# networks:
+#   clus_network:
+
+
+
+version: '3.7'
+
+services:
+ rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+      - clus_network
+
+ consumer1:
+    build:
+      context: .
+      dockerfile: Dockerfile-consumer1
+    depends_on:
+      - rabbitmq
+    networks:
+      - clus_network
+ consumer2:
+    build:
+      context: .
+      dockerfile: Dockerfile-consumer2
+    depends_on:
+      - rabbitmq
+    networks:
+      - clus_network
+ consumer3:
+    build:
+      context: .
+      dockerfile: Dockerfile-consumer3
+    depends_on:
+      - rabbitmq
+    networks:
+      - clus_network
+ producer:
+    build:
+      context: .
+      dockerfile: Dockerfile-producer
+    depends_on:
+      - rabbitmq
+      - consumer1
+      - consumer2
+      - consumer3
+    networks:
+      - clus_network
+
+networks:
+ clus_network:
